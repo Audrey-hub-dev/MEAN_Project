@@ -6,7 +6,12 @@ const Post = require('./models/post');
 
 const app = express();
 
-mongoose.connect("mongodb+srv://audrey:KTQ47eW2p88Cjqf@cluster0.u4kkidg.mongodb.net/?retryWrites=true&w=majority")
+const options = {
+  serverSelectionTimeoutMS: 300000, // set the server selection timeout to 30 seconds
+  socketTimeoutMS: 450000 // set the socket timeout to 45 seconds
+};
+
+mongoose.connect("mongodb+srv://audrey:KTQ47eW2p88Cjqf@cluster0.u4kkidg.mongodb.net/?retryWrites=true&w=majority", options)
   .then(() => {
     console.log('Connected to database!');
   })
@@ -28,7 +33,7 @@ app.use((req, res, next) => {
   next();
 })
 
-app.post('/api/posts',(req, res, next) => {
+app.post('/api/posts', (req, res, next) => {
   const post = new Post({
     title: req.body.title,
     content: req.body.content
@@ -41,22 +46,11 @@ app.post('/api/posts',(req, res, next) => {
 
 
 app.get('/api/posts',(req, res, next) => {
-  const posts = [
-    {
-      id: '!fadf12421l',
-      title: 'First server-side post',
-      content: 'This is coming from the server'
-    },
-    {
-      id: 'ksajflaj132',
-      title: 'Second server-side post',
-      content: 'This is coming from the server!'
-    },
-
-  ];
-  res.status(200).json({
-    message: 'Posts fetched succesfully!',
-    posts: posts
+  Post.find().then(documents => {
+      res.status(200).json({
+        message: 'Posts fetched succesfully!',
+        posts: documents
+      });
   });
 });
 
