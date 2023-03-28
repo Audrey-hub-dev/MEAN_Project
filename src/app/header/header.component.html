@@ -3,9 +3,15 @@
   <span class="spacer"></span>
   <ul>
     <li>
-      <a mat-button routerLink="/create" routerLinkActive #rla="routerLinkActive"
-        [color]="rla.isActive ? 'accent' : 'white' ">
+      <a mat-button routerLink="/create" routerLinkActive #rla1="routerLinkActive"
+        [color]="rla1.isActive ? 'accent' : 'white' ">
         New Post
+      </a>
+    </li>
+    <li>
+      <a mat-button routerLink="/login" routerLinkActive #rla2="routerLinkActive"
+        [color]="rla2.isActive ? 'accent' : 'white' ">
+        Login
       </a>
     </li>
   </ul>
