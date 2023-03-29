@@ -14,6 +14,12 @@
         Login
       </a>
     </li>
+    <li>
+      <a mat-button routerLink="/signup" routerLinkActive #rla3="routerLinkActive"
+        [color]="rla3.isActive ? 'accent' : 'white' ">
+        Signup
+      </a>
+    </li>
   </ul>
 </mat-toolbar>
 
