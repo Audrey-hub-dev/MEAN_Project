@@ -2,23 +2,26 @@
   <span><a routerLink="/">MyMessages</a></span>
   <span class="spacer"></span>
   <ul>
-    <li>
+    <li *ngIf="userIsAuthenticated">
       <a mat-button routerLink="/create" routerLinkActive #rla1="routerLinkActive"
         [color]="rla1.isActive ? 'accent' : 'white' ">
         New Post
       </a>
     </li>
-    <li>
+    <li *ngIf="!userIsAuthenticated">
       <a mat-button routerLink="/login" routerLinkActive #rla2="routerLinkActive"
         [color]="rla2.isActive ? 'accent' : 'white' ">
         Login
       </a>
     </li>
-    <li>
+    <li *ngIf="!userIsAuthenticated">
       <a mat-button routerLink="/signup" routerLinkActive #rla3="routerLinkActive"
         [color]="rla3.isActive ? 'accent' : 'white' ">
         Signup
       </a>
+    </li>
+    <li *ngIf="userIsAuthenticated">
+      <button mat-button>Logout</button>
     </li>
   </ul>
 </mat-toolbar>
